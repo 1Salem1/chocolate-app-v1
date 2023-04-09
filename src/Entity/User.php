@@ -4,10 +4,12 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+
+#[ORM\Table(name: '`T_USER`')]
 class User implements UserInterface {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,23 +23,19 @@ class User implements UserInterface {
     #[ORM\Column(name: "prenom_user")]
     public ?string $prenom ;
 
-    #[ORM\Column(name: "address_user")]
-    private ?string $address ;
+    #[ORM\Column(name: "address_user" , nullable:true)]
+    private string $address ;
 
-    #[ORM\Column(name: "tel_user")]
-    private ?string $tel ;
+    #[ORM\Column(name: "tel_user" , nullable:true )]
+    private string $tel ;
 
     #[ORM\Column(name: "email_user", length: 180, unique: true)]
-    private ?string $email ;
+    private string $email ;
 
-    #[ORM\Column(name: "dte_anniv_user")]
-    private ?string $dte_anniv ;
+   
+   
 
-    #[ORM\Column(name: "nom_de_lentreprise_user")]
-    private ?string $nom_de_lentreprise ;
-
-    #[ORM\Column(name: "login_user", unique: true)]
-    private ?string $login ;
+   
 
     #[ORM\Column(name: "password_user")]
     private ?string $password ;
@@ -45,11 +43,11 @@ class User implements UserInterface {
     #[ORM\Column(name: "role_user")]
     private array $roles = [];
 
-    #[ORM\Column(name: "code_postal_user")]
-    private ?string $code_postal ;
+    #[ORM\Column(name: "code_postal_user" , nullable:true)]
+    private string $code_postal ;
 
-    #[ORM\Column(name: "ville_user")]
-    private ?string $ville ;
+    #[ORM\Column(name: "ville_user" , nullable:true)]
+    private string $ville ;
 
     public function getId(): ?int
     {
@@ -129,36 +127,7 @@ class User implements UserInterface {
         return $this;
     }
 
-    public function getDteAnniv(): ?string
-    {
-        return $this->dte_anniv;
-    }
-
-    public function setDteAnniv(?string $dte_anniv): self
-    {
-        $this->dte_anniv = $dte_anniv;
-
-        return $this;
-    }
-
-    public function getNomDeLEntreprise(): ?string
-    {
-        return $this->nom_de_lentreprise;
-    }
-
- 
-
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    public function setLogin(string $login_user): self
-    {
-        $this->login = $login_user;
-
-        return $this;
-    }
+   
 
     public function getPassword(): ?string
     {
@@ -228,11 +197,5 @@ public function getUserIdentifier(): string
 {
     return $this->email;
 }
-
-
-
-
-
-
 }
 
